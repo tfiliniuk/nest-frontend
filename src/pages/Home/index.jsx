@@ -14,9 +14,9 @@ export const Home = () => {
         }
     };
 
-    useEffect(() => {
-        fetchUser();
-    }, []);
+    // useEffect(() => {
+    //     fetchUser();
+    // }, []);
     return (
         <Box sx={{bgcolor: 'background.default'}} id='test'>
             <Header />

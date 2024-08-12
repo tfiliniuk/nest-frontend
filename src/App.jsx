@@ -9,6 +9,7 @@ import getLPTheme from './themes/getLPTheme';
 import {Home} from './pages/Home';
 import {Login} from './pages/Login';
 import {Registration} from './pages/Registration';
+import {Profile} from './pages/Profile';
 
 function App() {
     const router = createBrowserRouter([
@@ -23,6 +24,10 @@ function App() {
         {
             path: '/registration',
             element: <Registration />,
+        },
+        {
+            path: '/profile',
+            element: <Profile />,
         },
     ]);
     const LPtheme = createTheme(getLPTheme('light'));

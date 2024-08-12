@@ -29,13 +29,11 @@ export const Registration = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axiosInstance.post('/auth/signup', {
+            await axiosInstance.post('/auth/signup', {
                 email,
                 username,
                 password: password.value,
             });
-
-            console.log('response', response);
             navigate('/login');
         } catch (error) {
             console.log('errro while register', error);
