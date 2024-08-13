@@ -1,7 +1,5 @@
 import {useState} from 'react';
 import {AxiosError} from 'axios';
-import {useNavigate} from 'react-router-dom';
-import axiosInstance from '../../api/axios';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,9 +10,10 @@ import Snackbar, {SnackbarCloseReason} from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 import {Header} from '../../components/Header';
+import {useAuth} from '../../context/AuthContext';
 
 export const Login = () => {
-    let navigate = useNavigate();
+    const auth = useAuth();
     const [creadentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -31,15 +30,7 @@ export const Login = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axiosInstance.post('/auth/signin', {
-                email: creadentials.email,
-                password: creadentials.password,
-            });
-
-            const {refreshToken, token} = response.data;
-            localStorage.setItem('token', token);
-            localStorage.setItem('refreshToken', refreshToken);
-            navigate('/profile');
+            await auth?.login(creadentials.email, creadentials.password);
         } catch (error: any) {
             setOpen(true);
             if (error instanceof AxiosError) {

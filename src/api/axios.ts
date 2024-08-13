@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
             const refreshToken = localStorage.getItem('refreshToken');
             if (originalRequest.headers && refreshToken) {
                 try {
-                    const response = await axios.post(`${process.env.REACT_APP_NOT_SECRET_CODE}/auth/refresh-token`, {
+                    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/refresh-token`, {
                         refresh_token: refreshToken,
                     });
                     const newAccessToken = response.data.token;
@@ -41,12 +41,11 @@ axiosInstance.interceptors.response.use(
                     console.log('errorRefresh', errorRefresh);
                     localStorage.clear();
                 }
+            } else {
+                localStorage.clear();
+                window.location.href = '/';
+                return Promise.reject(error);
             }
-            // else {
-            //     localStorage.clear();
-            //     window.location.href = '/';
-            //     return Promise.reject(error);
-            // }
         }
 
         return Promise.reject(error);

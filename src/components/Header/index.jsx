@@ -6,6 +6,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
+import {useAuth} from '../../context/AuthContext';
 
 const logoStyle = {
     width: '140px',
@@ -16,6 +17,7 @@ export const Header = () => {
     // let location = useLocation();
     // console.log('loc', location);
     let navigate = useNavigate();
+    const auth = useAuth();
 
     return (
         <AppBar
@@ -104,6 +106,16 @@ export const Header = () => {
                             size='small'
                             onClick={() => navigate('/registration')}>
                             Sign up
+                        </Button>
+                        <Button
+                            color='primary'
+                            variant='contained'
+                            size='small'
+                            onClick={() => {
+                                auth.logout();
+                                navigate('/login');
+                            }}>
+                            Logout
                         </Button>
                     </Box>
                 </Toolbar>
